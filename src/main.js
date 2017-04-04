@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+import VueResource from 'vue-resource';
 import VueRouter from 'vue-router';
 import 'bootstrap/dist/css/bootstrap.css';
 
 Vue.use(VueRouter);
-
+Vue.use(VueResource);
 import { routes } from './routes'; // importa as rotas do arquivo de rotas
+Vue.http.options.root = 'http://localhost:3000';
 
 const router = new VueRouter({ // instancia novo objeto de Router e passa router como parametro
   routes : routes,

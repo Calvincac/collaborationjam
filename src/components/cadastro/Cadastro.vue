@@ -4,29 +4,30 @@
       <h2 class="cadastro-title">Cadastro de Vagas</h2>
       <div class="form-group row">
         <div>
-            <input class="form-control" type="text" id="titulo" placeholder="Titulo da vaga" />
+            <input v-model="vaga.title" class="form-control" type="text" id="titulo" placeholder="Titulo da vaga" />
         </div>            
       </div>
 
       <div class="form-group row">        
         <div >
-            <input class="form-control" type="text" id="empresa" placeholder="Empresa" />
+            <input v-model="vaga.company" class="form-control" type="text" id="empresa" placeholder="Empresa" />
         </div>            
       </div>
 
       <div class="form-group row">        
         <div >
-            <input class="form-control" type="text" id="salario" placeholder="Salário" />
+            <input v-model="vaga.salary" class="form-control" type="text" id="salario" placeholder="Salário" />
         </div>            
       </div>
 
       <div class="form-group row">        
         <div >
-            <input class="form-control" type="text" id="descricao" placeholder="Descrição da vaga"/>
+            <input v-model="vaga.description" class="form-control" type="text" id="descricao" placeholder="Descrição da vaga"/>
         </div>            
       </div>
 
       <div class="form-group row">
+        <button class="btn btn-primary btn-save" type="submit" @click="addOffer">Salvar</button>
         <button class="btn btn-primary btn-save" type="submit">Salvar</button>
         <router-link :to="{name: 'home'}"><button class="btn btn-secondary btn-back" type="submit">Voltar</button></router-link>
         
@@ -43,14 +44,23 @@ export default {
     },
     data() {
       return {
-        vaga : []            
+        vaga : new Vaga(),
+        vagas : []            
       }
   },
  methods: {
+      addOffer(){
+        var value = this.vaga.trim();
+        if (!value) {
+          return
+        }
+        this.vagas.push();
+        this.vaga = '';
+      }
     
   },
   created () {
-    console.log(this.vaga);
+    
   }
 }
 </script>

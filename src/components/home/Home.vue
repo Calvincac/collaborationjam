@@ -4,17 +4,19 @@
         <h2>Busque por Vagas</h2>
         <input type="search" @input="filtro = $event.target.value" class="form-control" />
         <hr />
-        <ul>
-            <li v-for="vaga in filterVagas">
-                <h3>{{vaga.vaga.title}}</h3>              
+        <ul class="list-group">
+            <li v-for="vaga in filterVagas" class="list-group-item justify-content-between">
+                <h3>{{vaga.vaga.title}}</h3>
+                <p>{{vaga.vaga.description}} </p>
+                <router-link :to="{name:'information', params:{ id : vaga.vaga.id }}"><button type="button" class="btn btn-info">+ Informações</button> </router-link>                            
             </li>
-        </ul>
-
+        </ul> 
   </div>
 </template>
 
 <script>
 import Vaga from '../vaga/Vaga.js';
+import { routes }  from '../../routes';
 
 export default {
     components: {
@@ -23,19 +25,29 @@ export default {
       return {
         vagas : [
           {
-             vaga : new Vaga('Software Developer', 'Thoughtworks', '8000', 'Develop cool stuff')
+             vaga : new Vaga(1,'Software Developer', 'Thoughtworks', '8000', 'Develop cool stuff')
           },
           {
-              vaga : new Vaga('QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
+              vaga : new Vaga(2,'QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
+          },
+          {
+              vaga : new Vaga(3,'DevOps Engineer', 'Ilegra', '7000', 'Lots of Stuff')
+          },
+          {
+              vaga : new Vaga(4,'System Engineer', 'Thoughtworks', '7000', 'Do a lot of stuff')
+          },
+          {
+              vaga : new Vaga(5,'QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
+          },
+          {
+              vaga : new Vaga(5,'QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
           }         
         ],  
-
         filtro : ''                  
       }
   },
   computed : {
-    filterVagas() {
-      
+    filterVagas() {      
         if (this.filtro) {    
             let exp = new RegExp(this.filtro.trim(), 'i');
             return this.vagas.filter(vaga => exp.test(vaga.vaga.title));
@@ -44,10 +56,14 @@ export default {
         }
     }
   },
-  methods: {
-      
+  methods: {      
     },
     created () {
+      this.$http
+      .get('v1/fotos')
+      .then(res => res.json())
+      .then(res=> console.log(res))
+      .then(fotos => this.fotos = fotos, err => console.log(err)); 
       
     }
 }
@@ -55,6 +71,9 @@ export default {
 <style scoped>
 .space {
     margin-top:80px;
+}
+.arrow{
+  position:right;  
 }
 
 </style>
