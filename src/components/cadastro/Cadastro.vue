@@ -27,11 +27,19 @@
       </div>
 
       <div class="form-group row">
-        <button class="btn btn-primary btn-save" type="submit" @click="addOffer">Salvar</button>
+        <button class="btn btn-primary btn-save"  @click="addOffer">Adicionar +</button>
         <button class="btn btn-primary btn-save" type="submit">Salvar</button>
-        <router-link :to="{name: 'home'}"><button class="btn btn-secondary btn-back" type="submit">Voltar</button></router-link>
-        
+        <router-link :to="{name: 'home'}"><button class="btn btn-secondary btn-back" type="submit">Voltar</button></router-link>        
       </div>
+
+        <ul class="list-group">
+              <li v-for="vaga in vagas" class="list-group-item justify-content-between">
+                  <button class="btn btn-primary btn-save" type="submit">Add</button>
+                  <h3>Título da vaga: {{vaga.title}}</h3>
+                  <p>Descrição da vaga: {{vaga.description}} </p>
+                  <p>Salário: {{vaga.salary}}</p>                                                                                  
+              </li>
+        </ul>
   </div>
 </template>
 
@@ -50,12 +58,10 @@ export default {
   },
  methods: {
       addOffer(){
-        var value = this.vaga.trim();
-        if (!value) {
-          return
-        }
-        this.vagas.push();
-        this.vaga = '';
+          var value = this.vaga;
+          this.vagas.push(value);
+          console.log(this.vagas);
+          this.vaga = new Vaga();
       }
     
   },
