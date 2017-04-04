@@ -35,20 +35,22 @@
 </template>
 
 <script>
+import Vaga from '../vaga/Vaga.js';
+
 export default {
     components: {
       
     },
     data() {
-    return {    
-          
-    }
+      return {
+        vaga : []            
+      }
   },
  methods: {
     
   },
   created () {
-
+    console.log(this.vaga);
   }
 }
 </script>
