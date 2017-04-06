@@ -6,9 +6,9 @@
         <hr />
         <ul class="list-group">
             <li v-for="vaga in filterVagas" class="list-group-item justify-content-between">
-                <h3>{{vaga.vaga.title}}</h3>
-                <p>{{vaga.vaga.description}} </p>
-                <router-link :to="{name:'information', params:{ id : vaga.vaga.id }}"><button type="button" class="btn btn-info">+ Informações</button> </router-link>                            
+                <h3>{{vaga.title}}</h3>
+                <p>{{vaga.description}} </p>
+                <router-link :to="{name:'information', params:{ id : vaga.id }}"><button type="button" class="btn btn-info">+ Informações</button> </router-link>                            
             </li>
         </ul> 
   </div>
@@ -17,33 +17,15 @@
 <script>
 import Vaga from '../vaga/Vaga.js';
 import { routes }  from '../../routes';
+const $ = require('jquery')
 
 export default {
     components: {
     },
     data() {
-      return {
-        vagas : [
-          {
-             vaga : new Vaga(1,'Software Developer', 'Thoughtworks', '8000', 'Develop cool stuff')
-          },
-          {
-              vaga : new Vaga(2,'QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
-          },
-          {
-              vaga : new Vaga(3,'DevOps Engineer', 'Ilegra', '7000', 'Lots of Stuff')
-          },
-          {
-              vaga : new Vaga(4,'System Engineer', 'Thoughtworks', '7000', 'Do a lot of stuff')
-          },
-          {
-              vaga : new Vaga(5,'QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
-          },
-          {
-              vaga : new Vaga(5,'QA Engineer', 'Thoughtworks', '7000', 'Test cool stuff')
-          }         
-        ],  
-        filtro : ''                  
+      return {  
+        filtro : '',
+        vagas : []                  
       }
   },
   computed : {
@@ -59,14 +41,15 @@ export default {
   methods: {      
     },
     created () {
-      this.$http
-      .get('v1/fotos')
-      .then(res => res.json())
-      .then(res=> console.log(res))
-      .then(fotos => this.fotos = fotos, err => console.log(err)); 
-      
+      $.get('http://localhost:3000/')
+      //.then(res => res.json())
+      .then(
+          vagas => this.vagas = vagas.map(x => new Vaga(x.ID, x.title, x.company, x.salary, x.description))
+          , console.log
+      );       
     }
 }
+
 </script>
 <style scoped>
 .space {
