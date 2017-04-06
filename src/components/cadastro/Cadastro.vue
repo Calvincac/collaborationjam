@@ -1,39 +1,49 @@
 
 <template>
   <div class="center-div">
-      <h2 class="cadastro-title">Cadastro de Vagas</h2>
+         <div class="panel panel-info">
+              <div class="panel-heading">
+                         <div class="panel-title">Cadastre uma vaga</div>
+              </div>
+              <div class="panel-body" >
+                      <form @submit.prevent = "grava ()">
+                          <div class="form-group row">
+                            <label for="suscard" class="col-md-3 control-label">Título da vaga</label>
+                            <div class="col-md-9">
+                                <input v-model="vaga.title" name="titulo" v-validate data-vv-rules="required" class="form-control" type="text" id="titulo" placeholder="Titulo da vaga" />
+                                <span v-show="errors.has('titulo')">{{ errors.first('titulo') }}</span>
+                            </div>            
+                          </div>
 
-      <form @submit.prevent = "grava ()">
-          <div class="form-group row">
-            <div>
-                <input v-model="vaga.title" class="form-control" type="text" id="titulo" placeholder="Titulo da vaga" />
-            </div>            
-          </div>
+                          <div class="form-group row"> 
+                            <label for="suscard" class="col-md-3 control-label">Empresa</label>       
+                            <div class="col-md-9">
+                                <input v-model="vaga.company" name="empresa" v-validate data-vv-rules="required" class="form-control" type="text" id="empresa" placeholder="Empresa" />
+                                <span v-show="errors.has('empresa')">{{ errors.first('empresa') }}</span>
+                            </div>            
+                          </div>
 
-          <div class="form-group row">        
-            <div >
-                <input v-model="vaga.company" class="form-control" type="text" id="empresa" placeholder="Empresa" />
-            </div>            
-          </div>
+                          <div class="form-group row">  
+                            <label for="suscard" class="col-md-3 control-label">Salário</label>      
+                            <div class="col-md-9">
+                                <input v-model="vaga.salary" class="form-control" type="text" id="salario" placeholder="Salário" />
+                            </div>            
+                          </div>
 
-          <div class="form-group row">        
-            <div >
-                <input v-model="vaga.salary" class="form-control" type="text" id="salario" placeholder="Salário" />
-            </div>            
-          </div>
+                          <div class="form-group row">
+                            <label for="suscard" class="col-md-3 control-label">Título da vaga</label>        
+                            <div class="col-md-9">
+                                <input v-model="vaga.description" class="form-control" type="text" id="descricao" placeholder="Descrição da vaga"/>
+                            </div>            
+                          </div>
 
-          <div class="form-group row">        
-            <div >
-                <input v-model="vaga.description" class="form-control" type="text" id="descricao" placeholder="Descrição da vaga"/>
-            </div>            
-          </div>
-
-          <div class="form-group row">
-            <button class="btn btn-primary btn-save"  @click="addOffer">Adicionar +</button>
-            <button class="btn btn-primary btn-save" type="submit">Salvar</button>
-            <router-link :to="{name: 'home'}"><button class="btn btn-secondary btn-back" type="submit">Voltar</button></router-link>        
-          </div>
-      </form>
+                          <div class="form-group row">            
+                            <button class="btn btn-primary btn-save" type="submit">Salvar</button>
+                            <router-link :to="{name: 'home'}"><button class="btn btn-default btn-back" type="submit">Voltar</button></router-link>        
+                          </div>
+                      </form>
+                  </div>
+           </div>       
 
         <ul class="list-group">
               <li v-for="vaga in vagas" class="list-group-item justify-content-between">
@@ -46,6 +56,7 @@
 </template>
 
 <script>
+//<button class="btn btn-primary btn-save"  @click="addOffer">Adicionar +</button>
 import Vaga from '../vaga/Vaga.js';
 const $ = require('jquery')
 
@@ -84,16 +95,17 @@ export default {
 <style scoped>
 .center-div {
   margin: 0 auto;
-  width:60%;
+  width:80%;
   margin-top:80px;    
 }
 
 .cadastro-title{
-  text-align:center;
+  text-align:left;;
 }
 
 .btn-save{
-  float:right;  
+  float:right; 
+  margin-right:15px; 
 }
 
 .btn-back{
