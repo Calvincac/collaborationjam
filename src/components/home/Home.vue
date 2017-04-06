@@ -32,7 +32,7 @@ export default {
     filterVagas() {      
         if (this.filtro) {    
             let exp = new RegExp(this.filtro.trim(), 'i');
-            return this.vagas.filter(vaga => exp.test(vaga.vaga.title));
+            return this.vagas.filter(vaga => exp.test(vaga.title));
         } else {
             return this.vagas;
         }
@@ -42,7 +42,6 @@ export default {
     },
     created () {
       $.get('http://localhost:3000/')
-      //.then(res => res.json())
       .then(
           vagas => this.vagas = vagas.map(x => new Vaga(x.ID, x.title, x.company, x.salary, x.description))
           , console.log
