@@ -31,7 +31,7 @@
                           </div>
 
                           <div class="form-group row">
-                            <label for="suscard" class="col-md-3 control-label">Título da vaga</label>        
+                            <label for="suscard" class="col-md-3 control-label">Descrição</label>        
                             <div class="col-md-9">
                                 <input v-model="vaga.description" class="form-control" type="text" id="descricao" placeholder="Descrição da vaga"/>
                             </div>            
