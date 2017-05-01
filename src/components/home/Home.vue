@@ -46,7 +46,6 @@ export default {
     },
     created () { 
         $.get('http://localhost:3000/')
-        .then(JSON.parse)
       .then(
           data => this.vagas = data.map(x => new Vaga(x.ID, x.title, x.company, x.salary, x.description, x.categoria_id))
           , console.log
