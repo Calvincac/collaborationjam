@@ -37,6 +37,13 @@
                             </div>            
                           </div>
 
+                         <div class="form-group row">
+                            <label for="suscard" class="col-md-3 control-label">Categoria_id</label>        
+                            <div class="col-md-9">
+                                <input v-model="vaga.categoria_id" class="form-control" type="text" id="descricao" placeholder="Categoria"/>
+                            </div>            
+                          </div>
+
                           <div class="form-group row">            
                             <button class="btn btn-primary btn-save" type="submit">Salvar</button>
                             <router-link :to="{name: 'home'}"><button class="btn btn-default btn-back" type="submit">Voltar</button></router-link>        

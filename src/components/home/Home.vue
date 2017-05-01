@@ -34,7 +34,7 @@ export default {
   },
   computed : {
     filterVagas() {      
-        if (this.filtro) {    
+        if (this.filtro) {
             let exp = new RegExp(this.filtro.trim(), 'i');
             return this.vagas.filter(vaga => exp.test(vaga.title));
         } else {
@@ -44,12 +44,13 @@ export default {
   },
   methods: {      
     },
-    created () {
-      $.get('http://localhost:3000/')
+    created () { 
+        $.get('http://localhost:3000/')
+        .then(JSON.parse)
       .then(
-          vagas => this.vagas = vagas.map(x => new Vaga(x.ID, x.title, x.company, x.salary, x.description))
+          data => this.vagas = data.map(x => new Vaga(x.ID, x.title, x.company, x.salary, x.description, x.categoria_id))
           , console.log
-      );       
+      );
     }
 }
 
