@@ -1,4 +1,4 @@
-# Projeto Inovacao
+# InPoint (Collaboration Jam)
 
 > A Vue.js project
 
