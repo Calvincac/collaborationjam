@@ -27,18 +27,27 @@
         <div class="form-group col-md-6">
           <label for="nome">Nome</label>
           <input type="text" v-model="beacon.nome" class="form-control" id="nome">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="mensagem">Mensagem</label>
-          <input type="text" v-model="beacon.mensagem" class="form-control" id="mensagem">
-        </div>
-        <div class="form-group col-md-6">
+        </div>        
+        <div class="form-group col-md-4">
           <label for="mensagem">Tipo</label>
           <div class="checkbox">
             <label><input type="checkbox" value="">Comercial</label>
             <label id="labelinput" ><input type="checkbox" value="">Social</label>
           </div>
         </div>
+        <div class="form-group col-md-6">
+          <label for="mensagem">Mensagem</label>
+          <textarea class="form-control" v-model="beacon.mensagem" id="exampleTextarea" rows="3"></textarea>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="mensagem">Audio</label>
+          <input type="file" lass="form-control-file" id="mensagem">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="mensagem">Imagem</label>
+          <input type="file" lass="form-control-file" id="mensagem">
+        </div>
+        
     </div>
     <hr />
     <div id="actions" class="row">
@@ -50,6 +59,7 @@
   </form>
     <ul class="list-group">
           <li v-for="beacon in beacons" class="list-group-item justify-content-between beacons">
+              <button type="button" id="btn-excluir" @click="remove(beacon)" class="btn btn-danger">Excluir</button>
               <h3>ID do Beacon: {{beacon.id}}</h3>
               <p>Local: {{beacon.local}} </p>
               <p>Mensagem: {{beacon.mensagem}}</p>                                                                                  
@@ -79,6 +89,10 @@ export default {
           var value = this.beacon;
           this.beacons.push(value);
           this.beacon = new Beacon();
+      },
+      remove(beacon) {
+        var index = this.beacons.indexOf(beacon);
+        this.beacons.splice(index, 1);       
       }        
   },
   created () {
@@ -87,6 +101,10 @@ export default {
 }
 </script>
 <style scoped>
+#btn-excluir {
+  float:right;
+}
+
 #labelinput {
   margin-left:10px;
 }
